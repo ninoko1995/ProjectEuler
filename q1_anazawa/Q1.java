@@ -1,5 +1,3 @@
-package q1;
-
 // クラス名は大文字から始める
 public class Q1 {
   
