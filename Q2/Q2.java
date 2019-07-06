@@ -15,11 +15,11 @@ public class Q2 {
     final int LIMIT = 4000000;
     
     while(true){
-    	if(now>LIMIT)break;
+        if(now>LIMIT)break;
         if(is_even(now))sum+=now;
         next = now+prev;
         prev=now;
-        now=next; 	
+        now=next;   
     }
     System.out.println(sum);
   }
