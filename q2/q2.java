@@ -1,4 +1,4 @@
-public class q2 {
+public class Q2 {
   public static boolean is_even(int num){
     boolean even = true;
     if(num % 2 != 0){
@@ -12,10 +12,10 @@ public class q2 {
     int prev = 1;
     int now = 2;
     int next;
-    int max = 4000000;
+    final int LIMIT = 4000000;
     
     while(true){
-    	if(now>max)break;
+    	if(now>LIMIT)break;
         if(is_even(now))sum+=now;
         next = now+prev;
         prev=now;
