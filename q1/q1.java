@@ -1,35 +1,17 @@
-public class q1 {
+public class Q1 {
   public static void main(String[] args) {
+    final int LIMIT = 1000;
+
     int sum = 0;
-    int max = 1000;
-    int x1 = 3;
-    int x2 = 5;
-
-    int multiple = 0;
-    int x  = x1;
-    int i=0;
-
-    while(true){
-    	i++;
-    	multiple = i*x;
-    	if(multiple>=max)break;
-    	sum+=multiple;
-    	
+    int i = 1;
+    
+    while(i<LIMIT){
+        if(i%3==0 || i%5==0){
+            sum+=i;
+        }
+        i++;	    	
     }
-
-    multiple = 0;
-    x=x2;
-    i=0;
-
-    while(true){
-    	i++;
-    	multiple=i*x;
-    	if(multiple>=max)break;
-    	if(multiple%x1!=0){
-    		sum+=multiple;
-    	}
-    	
-    }
+    
     System.out.println(sum);
   }
 }
