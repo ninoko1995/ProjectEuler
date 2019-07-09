@@ -6,25 +6,24 @@ public class Q8 {
     //文字列の長さ確認用
     //System.out.println(STRING.length());
 
-    int partial_product;
-    int largest_product = 1;
-    int position = 1;
-    String digits=null;
+    long partialProduct;
+    long largestProduct = 1;
+    // int position = 1;
 
     for(int i=0;i<=STRING.length()-NUM;i++){
-    	partial_product = 1;
-    	String partial_string = STRING.substring(i,i+NUM);
-    	for(int t=0;t<partial_string.length	();t++){
-    		partial_product *= Integer.parseInt(partial_string.substring(t,t+1));
+    	partialProduct = 1;
+    	for(int t=i;t<i+NUM;t++){
+            partialProduct *= Integer.parseInt(STRING.substring(t,t+1));
+            // if(i==0){
+            //     System.out.println(partialProduct);
+            // }
     	}
-    	if(partial_product>largest_product){
-    		largest_product=partial_product;
-    		digits=partial_string;
-    		position=i;
+    	if(partialProduct>largestProduct){
+    		largestProduct=partialProduct;
+    		// position=i;
     	}
     }
-    System.out.println(position);
-    System.out.println(digits);
-    System.out.println(largest_product);
+    // System.out.println(position);
+    System.out.println(largestProduct);
   }
 }
