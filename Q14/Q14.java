@@ -3,14 +3,16 @@ public class Q14 {
     public static int countChain(long number, int[] chainNum) {
         int chain = 0;
         if (number < chainNum.length && chainNum[(int) number] > 0) {
-                return chainNum[(int) number];
+            return chainNum[(int) number];
         } else {
             if (number % 2 == 0) {
-                chain = countChain(number/2, chainNum) + 1;
-                if (number < chainNum.length) chainNum[(int) number] = chain;
+                chain = countChain(number / 2, chainNum) + 1;
+                if (number < chainNum.length)
+                    chainNum[(int) number] = chain;
             } else {
                 chain = countChain((number * 3 + 1) / 2, chainNum) + 2;
-                if (number < chainNum.length) chainNum[(int) number] = chain;
+                if (number < chainNum.length)
+                    chainNum[(int) number] = chain;
             }
             return chain;
         }
@@ -27,7 +29,6 @@ public class Q14 {
 
         // LIMIT以下のすべての数値のチェーンを数え、最大値記録。
         for (int i = LIMIT / 2; i <= LIMIT; i++) {
-            
             // チェーン数える部分
             chainNum[i] = countChain((long) i, chainNum);
 
