@@ -1,4 +1,42 @@
 public class Q11 {
+
+    public static long getProduct(int x, int y, int direction, int[][] grid) {
+        // 始点(x,y)からの積を計算する。
+        // direction = 0 -> 右方向, 1 -> 右下方向, 2 -> 下方向, 3 -> 左下方向 で計算する
+        long product = 1L;
+        int times = 0;
+        while (times < 4) {
+            switch (direction) {
+            case 0:
+                x++;
+                break;
+            case 1:
+                x++;
+                y++;
+                break;
+            case 2:
+                y++;
+                break;
+            case 3:
+                x--;
+                y++;
+                break;
+            }
+            if (x < 0 || x >= 20 || y < 0 || y >= 20) {
+                product = 0;
+                break;
+            }
+            if (grid[x][y] == 0) {
+                product = 0;
+                break;
+            }
+            product *= grid[x][y];
+            times++;
+        }
+
+        return product;
+    }
+
     public static void main(String[] args) {
         final int[][] GRID = { { 8, 02, 22, 97, 38, 15, 00, 40, 00, 75, 04, 05, 07, 78, 52, 12, 50, 77, 91, 8 },
                 { 49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 04, 56, 62, 00 },
@@ -20,59 +58,19 @@ public class Q11 {
                 { 20, 69, 36, 41, 72, 30, 23, 88, 34, 62, 99, 69, 82, 67, 59, 85, 74, 04, 36, 16 },
                 { 20, 73, 35, 29, 78, 31, 90, 01, 74, 31, 49, 71, 48, 86, 81, 16, 23, 57, 05, 54 },
                 { 01, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 01, 89, 19, 67, 48 } };
-        long maxProduct = 1;
-        long partialProduct = 1;
 
+        long maxProduct = 1;
+
+        // x,yをずらしていく
         for (int i = 0; i < 20; i++) {
             for (int t = 0; t < 20; t++) {
 
-                // right
-                partialProduct = 1;
-                for (int r = t; r < t + 4; r++) {
-                    if (r >= 20) {
-                        partialProduct = 1;
-                        break;
-                    }
-                    partialProduct *= GRID[i][r];
+                // directionを4方向計算           
+                for (int d = 0; d <= 3; d++) {
+                    long partialProduct = getProduct(i, t, d, GRID);
+                    if (partialProduct > maxProduct)
+                        maxProduct = partialProduct;
                 }
-                if (partialProduct > maxProduct)
-                    maxProduct = partialProduct;
-
-                // down
-                partialProduct = 1;
-                for (int d = i; d < i + 4; d++) {
-                    if (d >= 20) {
-                        partialProduct = 1;
-                        break;
-                    }
-                    partialProduct *= GRID[d][t];
-                }
-                if (partialProduct > maxProduct)
-                    maxProduct = partialProduct;
-
-                // diagnal(right,down)
-                partialProduct = 1;
-                for (int rd = 0; rd < 4; rd++) {
-                    if (i + rd >= 20 || t + rd >= 20) {
-                        partialProduct = 1;
-                        break;
-                    }
-                    partialProduct *= GRID[i + rd][t + rd];
-                }
-                if (partialProduct > maxProduct)
-                    maxProduct = partialProduct;
-
-                // diagnal(left,down)
-                partialProduct = 1;
-                for (int ld = 0; ld < 4; ld++) {
-                    if (i + ld >= 20 || t - ld < 0) {
-                        partialProduct = 1;
-                        break;
-                    }
-                    partialProduct *= GRID[i + ld][t - ld];
-                }
-                if (partialProduct > maxProduct)
-                    maxProduct = partialProduct;
             }
         }
         System.out.println(maxProduct);
