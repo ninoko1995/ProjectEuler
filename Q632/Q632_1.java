@@ -1,6 +1,6 @@
 import java.math.*;
 
-public class Q632 {
+public class Q632_1 {
     
     public static int numOfSquareDivisors(BigInteger n) {
         int count = 0;
@@ -35,7 +35,7 @@ public class Q632 {
 
 
     public static void main(String[] args) {
-        final BigInteger N = BigInteger.valueOf(10);
+        final BigInteger N = BigInteger.valueOf(100000);
         final BigInteger MOD = BigInteger.valueOf(1000000007);
         BigInteger product = BigInteger.valueOf(0);
         int[] counter = new int[getLimit(N)];
@@ -45,9 +45,7 @@ public class Q632 {
         }
 
         for (int i = 0;i < getLimit(N);i ++) {
-            if (counter[i] != 0) {
-                counter[i] = 
-            }
+            System.out.println(counter[i]);
         }
     }
 }
