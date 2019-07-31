@@ -29,7 +29,6 @@ public class Q14 {
 
         // LIMIT以下のすべての数値のチェーンを数え、最大値記録。
         for (int i = LIMIT / 2; i <= LIMIT; i++) {
-
             // チェーン数える部分
             chainNum[i] = countChain((long) i, chainNum);
 
