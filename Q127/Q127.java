@@ -1,33 +1,28 @@
 public class Q127 {
-    // check the numbers in the array are coprimes or not 
+    // 互いに素かつ素因数の積がcの値を超えない、という場合のみtrueを返す
     public static boolean checkAbcHit(int a, int b, int c) {
         int productOfPrimes = 1;
-        int limit = (int)(c / 2);
+        int limit = c / 2;
 
         boolean abcHit = true;
         int primeNum;
 
-        for (int i = limit; i >= 2; i--) {
+        for (int i = 2; i <= limit; i++) {
             primeNum = 0;
-            if (a % i == 0) {
-                while (a % i == 0) a = a / i;
-                primeNum++;
-            }
-            if (b % i == 0) {
-                while (b % i == 0) b = b / i;
-                primeNum++;
-            }
-            if (c % i == 0) {
-                while (c % i == 0) c = c / i;
-                primeNum++;
-            }
-            
+            if (a % i == 0) primeNum++;
+            if (b % i == 0) primeNum++;
+            if (c % i == 0) primeNum++;
 
+            // iがどの約数でもない場合はいらない
+            if (primeNum == 0) continue;
+
+            // 二つ以上の数の共通因数になっている場合は、互いに素ではない
             if (primeNum >= 2) {
                 abcHit = false;
                 break;
             }
 
+            // abcの約数の積がcを超えた場合、捨てる
             if (primeNum == 1) {
                 productOfPrimes *= i;
                 if (productOfPrimes >= c) {
@@ -35,33 +30,21 @@ public class Q127 {
                     break;
                 }
             }
+
+            while (a % i == 0) a /= i;
+            while (b % i == 0) b /= i;
+            while (c % i == 0) c /= i;
+            if (a == 1 && b == 1 && c == 1) break;
         }
+
+        if (a != 1 || b != 1 || c != 1) abcHit = false;
+
         return abcHit;
-    }
-
-    // get the product of primes of integer number, n
-    public static long getProductOfPrimes(long n) {
-        if (n < 0)System.out.println("n < 0. Something went wrong.");
-
-        long product = 1;
-        boolean alreadyDone = false;
-        int i = 2;
-        while (n != 1) {
-            if (n % i == 0) {
-                n /= i;
-                if (!alreadyDone) product *= i;
-                alreadyDone = true;
-            } else {
-                i++;
-                alreadyDone = false;
-            }
-        }
-        return product;
     }
 
 
     public static void main(String[] args) {
-        final int LIMIT = 120000;
+        final int LIMIT = 1000;
         int sigma = 0;
 
         for (int c = 3; c < LIMIT; c++) {
@@ -71,13 +54,9 @@ public class Q127 {
             int interval = 1;
             if (c % 2 == 0) interval = 2;
             for (int b = (int)(c / 2) + 1; b < c ; b += interval) {
-                int a = c - b;
-                if (a >= b) {
-                    System.out.println("a >= b. It's wrong");
-                    continue;
-                }
-                if (checkAbcHit(a,b,c)) {
+                if (checkAbcHit(c - b, b, c)) {
                     sigma += c;
+                    System.out.println(b + " " + c);
                 }
             }
         }	    	
