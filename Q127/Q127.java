@@ -118,7 +118,7 @@ public class Q127 {
     }
 
     public static void main(String[] args) {
-        final int LIMIT = 10000;
+        final int LIMIT = 120000;
 
         // 開始時間をミリ秒で取得
         long ts1 = System.currentTimeMillis();
